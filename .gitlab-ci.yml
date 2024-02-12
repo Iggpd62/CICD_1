@@ -7,16 +7,26 @@ build_job:
   stage: build
   script:
     - echo "Building the project"
-  artifacts:
-    paths:
-      - my_artifact.txt
 
 test_job:
   stage: test
   script:
     - echo "Running tests"
 
-deploy_job:
+deploy_pages:
   stage: deploy
   script:
-    - echo "Deploying the project"
+    - echo "Deploying GitLab Pages"
+  artifacts:
+    paths:
+      - public
+
+pages:
+  stage: deploy
+  script:
+    - echo "Publishing GitLab Pages"
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
